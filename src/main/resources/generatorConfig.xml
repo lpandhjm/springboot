@@ -7,7 +7,7 @@
 		<property name="javaFileEncoding" value="UTF-8" />
 
 		<commentGenerator >
-			<property name="suppressAllComments" value="false"/><!-- 是否取消注释 -->
+			<property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->
 			<property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳-->
 		</commentGenerator>
 
@@ -15,14 +15,14 @@
 		<!--数据库链接URL，用户名、密码 -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
 			connectionURL="jdbc:mysql://127.0.0.1:3306/demo"
-			userId="root" password="!@#$qwer">
+			userId="root" password="LIUpei199326!">
 		</jdbcConnection>
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
 		<!-- 生成模型的包名和位置 -->
-		<javaModelGenerator targetPackage="com.pei.liu.springboot.model"
+		<javaModelGenerator targetPackage="com.pei.liu.springboot.entity"
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
@@ -34,11 +34,21 @@
 		</sqlMapGenerator>
 		<!-- 生成DAO的包名和位置 -->
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.pei.liu.springboot.mapper" targetProject="src\main\java">
+			targetPackage="com.pei.liu.springboot.mapper" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-		<table tableName="user" domainObjectName="User"
+		<table tableName="class_info" domainObjectName="ClassInfo"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false">
+		</table>
+		<table tableName="student" domainObjectName="Student"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false">
+		</table>
+		<table tableName="teacher" domainObjectName="Teacher"
 			   enableCountByExample="false" enableUpdateByExample="false"
 			   enableDeleteByExample="false" enableSelectByExample="false"
 			   selectByExampleQueryId="false">

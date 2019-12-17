@@ -14,7 +14,7 @@ public class ScheduledTestJob {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Scheduled(cron="0 0/1 * * * ? ")
+//    @Scheduled(cron="0 0/1 * * * ? ")
     public void testJob(){
         logger.info("开始任务了----------");
 

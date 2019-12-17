@@ -3,6 +3,7 @@ package com.pei.liu.springboot;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
@@ -20,10 +21,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import javax.servlet.MultipartConfigElement;
-import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 
 @SpringBootApplication
+@MapperScan("com.pei.liu.springboot.mapper")
 @ImportResource({ "classpath:/applicationContext.xml" })
 @EnableScheduling
 @EnableAsync
@@ -37,7 +38,7 @@ public class SpringbootApplication {
     @Bean
     public AsyncTaskExecutor taskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setThreadNamePrefix("Anno-Executor");
+        executor.setThreadNamePrefix("异步任务线程：");
         executor.setMaxPoolSize(50);
         executor.setCorePoolSize(50);
 

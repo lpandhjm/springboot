@@ -23,8 +23,9 @@
 	<import resource="classpath:/applicationContext-datasource-mybatis.xml" />
 
 	<!--&lt;!&ndash; 加载dubbo配置 &ndash;&gt;-->
-	<!--<import resource="classpath:/dubbo-provider.xml" />-->
-	<!--<import resource="classpath:/dubbo-consumer.xml" />-->
+
+<!--	<import resource="classpath:/dubbo-provider.xml" />-->
+<!--	<import resource="classpath:/dubbo-consumer.xml" />-->
 	<!--<import resource="classpath:/job/elasticJob.xml" />-->
 
 

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pei.liu.springboot.mapper.ClassInfoMapper">
+    <resultMap id="BaseResultMap" type="com.pei.liu.springboot.entity.ClassInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="teacher_id" jdbcType="INTEGER" property="teacherId"/>
+    </resultMap>
+
+    <!--  一对一 查询association 使用  和 collection-->
+    <!--  第一种  -->
+
+    <resultMap id="ClassInfoMap" type="com.pei.liu.springboot.entity.ClassInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="teacher_id" jdbcType="INTEGER" property="teacherId"/>
+        <association property="teacher" javaType="com.pei.liu.springboot.entity.Teacher" columnPrefix="t_">
+            <id column="id" property="id"/>
+            <result column="name" property="name"/>
+            <result column="age" property="age"/>
+        </association>
+        <collection property="studentList" ofType="com.pei.liu.springboot.entity.Student" columnPrefix="s_">
+            <id column="id" property="id"/>
+            <result column="name" property="name"/>
+            <result column="age" property="age"/>
+            <result column="classId" property="classId"/>
+        </collection>
+    </resultMap>
+
+    <sql id="student_colum">
+    s.id s_id,s.name s_name,s.age s_age,s.class_id s_classId
+  </sql>
+
+    <sql id="teacher_column">
+    t.id t_id,t.name t_name,t.age t_age
+  </sql>
+
+    <select id="getClassInfoMap" parameterType="java.lang.Integer" resultMap="ClassInfoMap">
+        select c.id,c.name,c.teacher_id,
+        <include refid="teacher_column"></include>,
+        <include refid="student_colum"></include>
+        from class_info c,teacher t ,student s
+        where c.teacher_id=t.id
+        and c.id=s.class_id
+        and c.id=#{id}
+    </select>
+
+    <!--  方式二：嵌套查询：通过执行另外一个SQL映射语句来返回预期的复杂类型 -->
+
+    <resultMap id="ClassInfoMap2" type="com.pei.liu.springboot.entity.ClassInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="teacher_id" jdbcType="INTEGER" property="teacherId"/>
+        <association property="teacher" column="teacher_id" select="getTeacher">
+        </association>
+    </resultMap>
+
+    <select id="getClassInfoMap2" parameterType="java.lang.Integer" resultMap="ClassInfoMap2">
+        select
+        <include refid="Base_Column_List"></include>
+        from class_info where id =#{id}
+    </select>
+    <select id="getTeacher" parameterType="java.lang.Integer" resultType="com.pei.liu.springboot.entity.Teacher">
+    select id ,name,age from teacher where id=#{id};
+  </select>
+
+
+    <sql id="Base_Column_List">
+    id, name, teacher_id
+  </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from class_info
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from class_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.pei.liu.springboot.entity.ClassInfo">
+    insert into class_info (id, name, teacher_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{teacherId,jdbcType=INTEGER}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.pei.liu.springboot.entity.ClassInfo">
+        insert into class_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="teacherId != null">
+                teacher_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherId != null">
+                #{teacherId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.pei.liu.springboot.entity.ClassInfo">
+        update class_info
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherId != null">
+                teacher_id = #{teacherId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.pei.liu.springboot.entity.ClassInfo">
+    update class_info
+    set name = #{name,jdbcType=VARCHAR},
+      teacher_id = #{teacherId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

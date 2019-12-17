@@ -86,12 +86,6 @@
 		</property>
 	</bean>
 
-	<!-- DAO接口所在包名，Spring会自动查找其下的类 ,包下的类需要使用@MapperScan注解,否则容器注入会失败 -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.pei.liu.springboot.mapper.*" />
-		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-	</bean>
-
 
 	<!-- 数据源事务管理器，提供对单个javax.sql.DataSource事务管理，用于Spring JDBC、iBATIS等框架的事务管理 -->
 	<!--<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
