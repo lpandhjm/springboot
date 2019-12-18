@@ -16,15 +16,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class SpringbootApplicationTests {
 
-    @Test
-    public void getBean() throws Exception {
-        String location = "/Users/liupei/Desktop/privateProject/springboot/src/main/java/com/pei/liu/springboot/demo/spring/ioc/ioc.xml";
-        SimpleIoc simpleIoc =new SimpleIoc(location);
-        Wheel wheel = (Wheel) simpleIoc.getBean("wheel");
-        System.out.println(wheel);
-        Car car = (Car) simpleIoc.getBean("car");
-        System.out.println(car);
-    }
+//    @Test
+//    public void getBean() throws Exception {
+//        String location = "/Users/liupei/Desktop/privateProject/springboot/src/main/java/com/pei/liu/springboot/demo/spring/ioc/ioc.xml";
+//        SimpleIoc simpleIoc =new SimpleIoc(location);
+//        Wheel wheel = (Wheel) simpleIoc.getBean("wheel");
+//        System.out.println(wheel);
+//        Car car = (Car) simpleIoc.getBean("car");
+//        System.out.println(car);
+//    }
 
 
 

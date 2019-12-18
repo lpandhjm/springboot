@@ -12,8 +12,8 @@ import java.util.Map;
  * @create: 2019-12-15 22:38
  * @version: 1.0$
  */
-@Component
-@RabbitListener(queues = "topic.woman")
+//@Component
+//@RabbitListener(queues = "topic.woman")
 public class TopicTotalReceiver {
 
     @RabbitHandler

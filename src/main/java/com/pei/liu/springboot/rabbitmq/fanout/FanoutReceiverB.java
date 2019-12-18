@@ -13,8 +13,8 @@ import java.util.Map;
  * @create: 2019-12-15 22:57
  * @version: 1.0$
  */
-@Component
-@RabbitListener(queues = "fanoutB")
+//@Component
+//@RabbitListener(queues = "fanoutB")
 public class FanoutReceiverB {
 
     @RabbitHandler

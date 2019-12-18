@@ -13,8 +13,8 @@ import java.util.Map;
  * @version: 1.0$
  */
 
-@Component
-@RabbitListener(queues = "topic.man")
+//@Component
+//@RabbitListener(queues = "topic.man")
 public class TopicManReceiver {
 
     @RabbitHandler

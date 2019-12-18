@@ -12,8 +12,8 @@ import java.util.Map;
  * @create: 2019-12-15 23:01
  * @version: 1.0$
  */
-@Component
-@RabbitListener(queues = "fanoutC")
+//@Component
+//@RabbitListener(queues = "fanoutC")
 public class FanoutReceiverC {
 
     @RabbitHandler
